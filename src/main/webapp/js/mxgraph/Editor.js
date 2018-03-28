@@ -780,7 +780,7 @@ function Dialog(editorUi, elt, w, h, modal, closable, onClose, noScroll)
 	var linkHandler = function(evt)
 	{
 		var source = mxEvent.getSource(evt);
-		console.info( '+++ Generic BG : Source of right-click is ... ' + source );  // LMP--DEBUG
+		// console.info( '+++ Generic BG : Source of right-click is ... ' + source );  // LMP--DEBUG
 		mxEvent.consume(evt);
 	};
 	mxEvent.addListener(	div, 'contextmenu', linkHandler);
