@@ -68,7 +68,7 @@ DiagramEditor.prototype.config = null;
 // DiagramEditor.prototype.drawDomain = 'https://jgraph.github.io/drawio/src/main/webapp/index.html';
 // DiagramEditor.prototype.drawDomain = 'https://embed.diagrams.net/?embed=1&proto=json&spin=1&analytics=0&db=0&gapi=0&od=0&picker=0';
 //DiagramEditor.prototype.drawDomain = 'http://localhost/drawio.git/src/main/webapp/index.html?embed=1&proto=json&spin=1&analytics=0&db=0&gapi=0&od=0&picker=0';
-DiagramEditor.prototype.drawDomain = 'http://localhost/drawio.git/src/main/webapp/index.html?embed=1&proto=json&spin=1&analytics=0&db=0&gapi=0&od=0&picker=0';
+DiagramEditor.prototype.drawDomain = 'http://localhost/drawio.git/src/main/webapp/index.html?dev=1&embed=1&proto=json&spin=1&analytics=0&db=0&gapi=0&od=0&picker=0';
 
 /**
  * UI theme to be use.
