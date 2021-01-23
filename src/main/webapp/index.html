@@ -252,7 +252,7 @@
 //			var drawDevUrl = document.location.protocol + '//devhost.jgraph.com/drawio/src/main/webapp/';
 			var drawDevUrl = document.location.protocol + '//localhost/drawio.git/src/main/webapp/';
 			var geBasePath = drawDevUrl + '/js/grapheditor';
-			var mxBasePath = mxDevUrl + '/mxgraph';
+			var mxBasePath = mxDevUrl + '/mxgraph/javascript/src';
 			
 			if (document.location.protocol == 'file:')
 			{
@@ -267,7 +267,7 @@
 			mxscript(drawDevUrl + 'js/PreConfig.js');
 			mxscript(drawDevUrl + 'js/diagramly/Init.js');
 			mxscript(geBasePath + '/Init.js');
-			mxscript(mxBasePath + '/javascript/mxClient.js');
+			mxscript(mxBasePath + '/js/mxClient.js');
 			
 			// Adds all JS code that depends on mxClient. This indirection via Devel.js is
 			// required in some browsers to make sure mxClient.js (and the files that it
