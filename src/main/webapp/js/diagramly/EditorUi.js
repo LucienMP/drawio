@@ -11661,7 +11661,7 @@
 
 				lastData = getData();
 				
-				if (autosave && changeListener == null)
+				if ((autosave && changeListener == null) || modifiedevent)
 				{
 					changeListener = mxUtils.bind(this, function(sender, eventObject)
 					{
@@ -11669,10 +11669,18 @@
 
 						if (data != lastData && !ignoreChange)
 						{
-							var msg = this.createLoadMessage('autosave');
-							msg.xml = data;
-							var parent = window.opener || window.parent;
-							parent.postMessage(JSON.stringify(msg), '*');
+							if(modifiedevent) {
+								var msg = this.createLoadMessage('modified');
+								var parent = window.opener || window.parent;
+								parent.postMessage(JSON.stringify(msg), '*');
+							} 
+
+							if(autosave){
+								var msg = this.createLoadMessage('autosave');
+								msg.xml = data;
+								var parent = window.opener || window.parent;
+								parent.postMessage(JSON.stringify(msg), '*');
+							}
 						}
 						
 						lastData = data;
@@ -11680,40 +11688,7 @@
 					
 					this.editor.graph.model.addListener(mxEvent.CHANGE, changeListener);
 
-					// Some options trigger autosave
-					this.editor.graph.addListener('gridSizeChanged', changeListener);
-					this.editor.graph.addListener('shadowVisibleChanged', changeListener);
-					this.addListener('pageFormatChanged', changeListener);
-					this.addListener('pageScaleChanged', changeListener);
-					this.addListener('backgroundColorChanged', changeListener);
-					this.addListener('backgroundImageChanged', changeListener);
-					this.addListener('foldingEnabledChanged', changeListener);
-					this.addListener('mathEnabledChanged', changeListener);
-					this.addListener('gridEnabledChanged', changeListener);
-					this.addListener('guidesEnabledChanged', changeListener);
-					this.addListener('pageViewChanged', changeListener);
-				}
-				
-				if (modifiedevent)
-				{
-					changeListener = mxUtils.bind(this, function(sender, eventObject)
-					{
-						var data = getData();
-
-						if (data != lastData && !ignoreChange)
-						{
-							var msg = this.createLoadMessage('modified');
-							// msg.xml = data;
-							var parent = window.opener || window.parent;
-							parent.postMessage(JSON.stringify(msg), '*');
-						}
-						
-						lastData = data;
-					});
-					
-					this.editor.graph.model.addListener(mxEvent.CHANGE, changeListener);
-
-					// Some options trigger modified
+					// Some options trigger autosave/modified
 					this.editor.graph.addListener('gridSizeChanged', changeListener);
 					this.editor.graph.addListener('shadowVisibleChanged', changeListener);
 					this.addListener('pageFormatChanged', changeListener);
