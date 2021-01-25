@@ -246,11 +246,11 @@
 		{
 			// Used to request grapheditor/mxgraph sources in dev mode
 //			var mxDevUrl = document.location.protocol + '//devhost.jgraph.com/drawio/src/main';
-			var mxDevUrl = document.location.protocol + '//localhost/drawio.git/src/main';
+			var mxDevUrl = document.location.protocol + '//localhost/Projects/mediawiki/drawio/src/main';
 			
 			// Used to request draw.io sources in dev mode
 //			var drawDevUrl = document.location.protocol + '//devhost.jgraph.com/drawio/src/main/webapp/';
-			var drawDevUrl = document.location.protocol + '//localhost/drawio.git/src/main/webapp/';
+			var drawDevUrl = document.location.protocol + '//localhost/Projects/mediawiki/drawio/src/main/webapp/';
 			var geBasePath = drawDevUrl + '/js/grapheditor';
 			var mxBasePath = mxDevUrl + '/mxgraph/javascript/src';
 			
@@ -267,7 +267,8 @@
 			mxscript(drawDevUrl + 'js/PreConfig.js');
 			mxscript(drawDevUrl + 'js/diagramly/Init.js');
 			mxscript(geBasePath + '/Init.js');
-			mxscript(mxBasePath + '/js/mxClient.js');
+			// mxscript(mxBasePath + '/mxClient.js');
+			mxscript('/Projects/mediawiki/drawio/src/main/webapp/mxgraph/mxClient.js');
 			
 			// Adds all JS code that depends on mxClient. This indirection via Devel.js is
 			// required in some browsers to make sure mxClient.js (and the files that it

@@ -11507,6 +11507,7 @@
 					else if (data.action == 'load')
 					{
 						autosave = data.autosave == 1;
+						modifiedevent = data.modifiedevent == 1;
 						this.hideDialog();
 						
 						if (data.modified != null && urlParams['modified'] == null)
@@ -11654,7 +11655,7 @@
 				}
 
 				lastData = getData();
-
+				
 				if (autosave && changeListener == null)
 				{
 					changeListener = mxUtils.bind(this, function(sender, eventObject)
@@ -11688,9 +11689,43 @@
 					this.addListener('pageViewChanged', changeListener);
 				}
 				
+				if (modifiedevent)
+				{
+					changeListener = mxUtils.bind(this, function(sender, eventObject)
+					{
+						var data = getData();
+
+						if (data != lastData && !ignoreChange)
+						{
+							var msg = this.createLoadMessage('modified');
+							// msg.xml = data;
+							var parent = window.opener || window.parent;
+							parent.postMessage(JSON.stringify(msg), '*');
+						}
+						
+						lastData = data;
+					});
+					
+					this.editor.graph.model.addListener(mxEvent.CHANGE, changeListener);
+
+					// Some options trigger autosave
+					this.editor.graph.addListener('gridSizeChanged', changeListener);
+					this.editor.graph.addListener('shadowVisibleChanged', changeListener);
+					this.addListener('pageFormatChanged', changeListener);
+					this.addListener('pageScaleChanged', changeListener);
+					this.addListener('backgroundColorChanged', changeListener);
+					this.addListener('backgroundImageChanged', changeListener);
+					this.addListener('foldingEnabledChanged', changeListener);
+					this.addListener('mathEnabledChanged', changeListener);
+					this.addListener('gridEnabledChanged', changeListener);
+					this.addListener('guidesEnabledChanged', changeListener);
+					this.addListener('pageViewChanged', changeListener);
+				}
+				
 				// Sends the bounds of the graph to the host after parsing
 				if (urlParams['returnbounds'] == '1' || urlParams['proto'] == 'json')
 				{
+					console.log("here");
 					var resp = this.createLoadMessage('load');
 					
 					// Attaches XML to response
