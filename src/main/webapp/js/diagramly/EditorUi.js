@@ -11233,6 +11233,11 @@
 						{
 							this.editor.modified = data.modified;
 						}
+							
+						if(data.messageKey == null && data.message == null) {
+							var modify_bool = data.modified;
+							this.editor.postMessage({action: 'modified', modified: modify_bool})
+						}
 						
 						return;
 					}
@@ -11708,7 +11713,7 @@
 					
 					this.editor.graph.model.addListener(mxEvent.CHANGE, changeListener);
 
-					// Some options trigger autosave
+					// Some options trigger modified
 					this.editor.graph.addListener('gridSizeChanged', changeListener);
 					this.editor.graph.addListener('shadowVisibleChanged', changeListener);
 					this.addListener('pageFormatChanged', changeListener);
